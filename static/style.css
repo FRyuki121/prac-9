@@ -127,3 +127,26 @@ button:hover {
     line-height: 1.5;
     word-wrap: break-word;
 }
+.counter-box {
+    background: #e8f4fd;
+    border: 1px solid #bce0fd;
+    padding: 12px 20px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-size: 15px;
+    color: #1d6fa5;
+}
+
+.delete-btn {
+    color: #e74c3c;
+    text-decoration: none;
+    margin-left: 15px;
+    font-weight: bold;
+    font-size: 13px;
+    transition: color 0.2s;
+}
+
+.delete-btn:hover {
+    color: #c0392b;
+    text-decoration: underline;
+}
