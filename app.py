@@ -1,7 +1,8 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, session
 import sqlite3
 
 app = Flask(__name__)
+app.secret_key = 'super-secret-key-for-sessions'
 DB_NAME = 'guestbook.db'
 
 MONTHS = {
@@ -61,8 +62,30 @@ def add():
 
 @app.route('/delete/<int:message_id>')
 def delete(message_id):
+    if not session.get('logged_in'):
+        return redirect('/login')
     from database import delete_message
     delete_message(message_id)
+    return redirect('/')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form.get('username', '').strip()
+        password = request.form.get('password', '').strip()
+        
+        from database import check_user
+        if check_user(username, password):
+            session['logged_in'] = True
+            return redirect('/')
+        else:
+            return render_template('login.html', error='Неверный логин или пароль')
+            
+    return render_template('login.html')
+
+@app.route('/logout')
+def logout():
+    session.pop('logged_in', None)
     return redirect('/')
 
 if __name__ == '__main__':
