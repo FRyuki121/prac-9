@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Гостевая книга</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background-color: #f9f9f9; }
+        h1 { color: #333; }
+        .message-box { background: white; border: 1px solid #ddd; padding: 15px; margin-bottom: 15px; border-radius: 5px; }
+        .message-author { font-weight: bold; color: #007BFF; }
+        .message-date { font-size: 0.8em; color: #666; }
+        .message-text { margin-top: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Гостевая книга</h1>
+
+    {% if messages %}
+        {% for msg in messages %}
+            <div class="message-box">
+                <span class="message-author">{{ msg.name }}</span> 
+                <span class="message-date">({{ msg.created_at }})</span>
+                <div class="message-text">{{ msg.message }}</div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>Пока нет сообщений.</p>
+    {% endif %}
+</body>
+</html>
