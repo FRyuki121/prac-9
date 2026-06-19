@@ -17,7 +17,7 @@ def format_russian_date(date_str):
         year = parts[0]
         month = MONTHS.get(parts[1], parts[1])
         day = str(int(parts[2]))
-        return f"{day} {month} {year}"
+        return f"{day} {month} {year} г."
     except:
         return date_str
 
